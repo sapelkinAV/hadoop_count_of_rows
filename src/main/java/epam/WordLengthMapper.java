@@ -13,7 +13,7 @@ import java.util.StringTokenizer;
 /**
  * Created by alexander on 17.10.16.
  */
-public class WordLengthMapper extends Mapper<LongWritable,Text,Text,IntWritable> {
+public class WordLengthMapper extends Mapper<LongWritable,Text,IntWritable,Text> {
     private Text word = new Text();
 
     @Override
@@ -22,7 +22,7 @@ public class WordLengthMapper extends Mapper<LongWritable,Text,Text,IntWritable>
         StringTokenizer tokenizer = new StringTokenizer(line);
         while (tokenizer.hasMoreTokens()) {
             word.set(tokenizer.nextToken());
-            context.write(word,new IntWritable(word.toString().length()));
+            context.write(new IntWritable(word.toString().length()),word);
         }
     }
 }

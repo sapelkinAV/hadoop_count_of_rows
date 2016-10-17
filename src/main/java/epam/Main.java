@@ -1,6 +1,7 @@
 package epam;
 
 import org.apache.hadoop.conf.Configured;
+import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.NullWritable;
 import org.apache.hadoop.io.Text;
@@ -30,12 +31,16 @@ public class Main extends Configured implements Tool {
         }
         job.setInputFormatClass(TextInputFormat.class);
         job.setOutputFormatClass(TextOutputFormat.class);
-        job.setMapOutputKeyClass(NullWritable.class);
+
+        job.setMapOutputKeyClass(IntWritable.class);
         job.setMapOutputValueClass(Text.class);
-        job.setOutputKeyClass(Text.class);
-        job.setOutputValueClass(NullWritable.class);
-        job.setMapperClass(ExampleMapper.class);
-        job.setReducerClass(ExampleReducer.class);
+
+        job.setOutputKeyClass(IntWritable.class);
+        job.setOutputValueClass(Text.class);
+
+        job.setMapperClass(WordLengthMapper.class);
+        job.setReducerClass(WordLengthReducer.class);
+
         return job.waitForCompletion(true) ? 0 : 1;
     }
 
