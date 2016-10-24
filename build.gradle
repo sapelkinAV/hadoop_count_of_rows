@@ -18,5 +18,5 @@ compileJava {
 
 
 jar {
-    baseName 'example'
+    baseName 'lab2'
 }
