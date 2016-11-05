@@ -4,6 +4,8 @@ import org.apache.hadoop.conf.Configured;
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Job;
+import org.apache.hadoop.mapreduce.TaskReport;
+import org.apache.hadoop.mapreduce.TaskType;
 import org.apache.hadoop.mapreduce.lib.input.TextInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
 import org.apache.hadoop.util.Tool;
@@ -36,7 +38,23 @@ public class Main extends Configured implements Tool {
         job.setReducerClass(RowCountReducer.class);
 
         job.setNumReduceTasks(1);
-        return job.waitForCompletion(true) ? 0 : 1;
+        job.waitForCompletion(true);
+        TaskReport[] mapReports = job.getTaskReports(TaskType.MAP);
+        TaskReport[] reduceReports = job.getTaskReports(TaskType.REDUCE);
+        printReport(mapReports,"MAP");
+        printReport(reduceReports,"REDUCE");
+        return 0;
+
+    }
+
+    private void printReport(TaskReport[] reports,String type) {
+        long sum_time = 0;
+        for(TaskReport report : reports) {
+            long time = report.getFinishTime() - report.getStartTime();
+            sum_time += time;
+            System.out.println(report.getTaskId() + " took " + time + " millis!");
+        }
+        System.out.println("final time for "+type +" "+String.valueOf(sum_time));
     }
 
 

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/hadoop_count_of_rows.iml" filepath="$PROJECT_DIR$/.idea/modules/hadoop_count_of_rows.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/hadoop_count_of_rows_main.iml" filepath="$PROJECT_DIR$/.idea/modules/hadoop_count_of_rows_main.iml" group="hadoop_count_of_rows" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/hadoop_count_of_rows_test.iml" filepath="$PROJECT_DIR$/.idea/modules/hadoop_count_of_rows_test.iml" group="hadoop_count_of_rows" />
+    </modules>
+  </component>
+</project>
